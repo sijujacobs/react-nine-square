@@ -17,7 +17,7 @@
       max-width: 160px;
       max-height: 160px;
       border: 1px solid rgb(119, 116, 119);
-
+      box-shadow: 1px 1px 10px 1px rgba(145,145,145,0.6);
       .square {
         display: grid;
         place-content: center;
@@ -47,7 +47,7 @@
         border: 1px solid #c5bfbf;
         border-radius: 3px;
         transition: all .2s ease-in;
-        box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.6);
+        box-shadow: 1px 1px 10px 1px rgba(185,185,185,0.6);
         &:hover{
           cursor: pointer;
           box-shadow: 1px 1px 10px 1px rgba(119, 116, 119, .6);
