@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+
+.testDiv{
+  width: 40%;
+  height: 50px;
+  color: white;
+}
+.testDiv.black{
+  background-color: #282c34;
+}
+.testDiv.red{
+  background-color: #fa0707;
+}
+button{
+  box-sizing: border-box;
+  width: 125px;
+  height: 30px;
+  padding: 5px;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.4);
+  margin: 10px;
+}
+button:hover{
+  cursor: pointer;
+}
