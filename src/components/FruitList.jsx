@@ -23,7 +23,7 @@ const FruitList = () => {
       case 'add':
         const newUser = {
           id: 1,
-          name: 'aaa',
+          name: 'aaaName',
           phone: '1111',
           email: 'email@email.com'
         }
