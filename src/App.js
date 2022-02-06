@@ -1,39 +1,61 @@
-import { useState } from 'react';
-import SquareContainer from './components/SquareContainer';
-import { orderTypes } from './constants';
+import React, { useEffect, useReducer } from "react";
+import InputTwo from './components/InputTwo';
+import FruitList from "./components/FruitList";
+import ToDoList from "./components/ToDoList";
+import LoginForm from "./components/LoginForm";
+
+export const AppContext = React.createContext();
+const initialState = {
+  initialData: '',
+  users: [],
+}
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'ADD':
+      const users = [...state.fruits, action.payload];
+      return { ...state, users };
+    case 'EDIT':
+      const thisUserIndex = users.findIndex(f => f.id === action.payload.id);
+      const usersClone = [...users];
+      usersClone.splice(thisUserIndex, 0, action.payload)
+      return { ...initialState, users: usersClone };
+    case 'DELETE':
+      const theseUsers = users.find(f => f.id !== action.payload.id);
+      return { ...initialState, users: theseUsers };
+    case 'UPDATE':
+      return initialState;
+    case 'FETCH':
+      return { ...initialState, users: action.payload };
+    default:
+      return initialState;
+  }
+}
+
 
 const App = () => {
-  
-  const [numbers, setNumbers] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
-  const buttonClickHandler = (event) => {
-    const buttonClass = event.target.className.split(' ')[1];
-    buttonClass && changetextContent(buttonClass);
-  }
 
-  const changetextContent = (orderType)  => {
-    if(orderType === orderTypes.SHUFFLE) {
-      numbers.sort((a, b) => 0.5 - Math.random());
-    } else if (orderType === orderTypes.DESCEND) {
-      numbers.sort((a, b) => b - a);
-    } else {
-      numbers.sort((a, b) => a - b);
-    }
-    setNumbers([...numbers]);
-    console.log("changetextContent----> ", numbers);
-  }
- 
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const inputRef = React.createRef();
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [inputRef]);
+  const items = [
+    { text: 'Buy Grocery', done: true },
+    { text: 'Play Guitar', done: false },
+    { text: 'Family dinner', done: false },
+  ]
+
   return (
-    <div className="App">
-      <div id="mainContainer">
-        <SquareContainer numbers={numbers} />
-        <div id="actionContainer">
-          <button className='button ascend' onClick={ buttonClickHandler }>Ascend</button>
-          <button className='button descend' onClick={ buttonClickHandler }>Descend</button>
-          <button className='button shuffle' onClick={ buttonClickHandler }>Shuffle</button>
-        </div>
-        <h3>ReactJS</h3>
-      </div>
-    </div>
+    <React.Fragment>
+      <h1>Hello World</h1>
+      <AppContext.Provider value={{ state, dispatch }}>
+        <ToDoList items={items} onItemClick={(item, event) => { console.log(item, event) }} />
+        <InputTwo />
+        <LoginForm ref={inputRef} />
+        <FruitList />
+      </AppContext.Provider>
+    </React.Fragment>
   );
 }
 

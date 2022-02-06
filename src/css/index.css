@@ -17,10 +17,8 @@
 #mainContainer #squareContainer {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(0, 1fr))[3];
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-  max-width: 160px;
-  max-height: 160px;
+  -ms-grid-columns: (minmax(0px, 1fr))[3];
+      grid-template-columns: repeat(3, minmax(0px, 1fr));
   border: 1px solid #777477;
   -webkit-box-shadow: 1px 1px 10px 1px rgba(145, 145, 145, 0.6);
           box-shadow: 1px 1px 10px 1px rgba(145, 145, 145, 0.6);
